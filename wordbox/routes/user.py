@@ -13,10 +13,12 @@ class User(Resource):
 
     def post(self):
         req = request.get_json()
+        telefonos = req.get("telefonos", "")
+        telefonos = ",".join(telefonos)
         user = UserModel(nombre=req.get("nombre",""),
                          apellido=req.get("apellido",""),
-                         direccion=req.get("direccion","")
+                         direccion=req.get("direccion",""),
+                         telefonos=telefonos
                          )
         id = user.save()
-
         return {"id": str(id)}
